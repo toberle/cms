@@ -1,0 +1,9 @@
+= CMS
+Tomas Oberle
+2022-06-24
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/java]
+
+This is a user manual for the CMS project.

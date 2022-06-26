@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: local_pwd
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8090:8080"
