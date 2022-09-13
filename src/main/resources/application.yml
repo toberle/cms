@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: cms-be
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+spring.datasource:
+  url: jdbc:postgresql://localhost:5432/cms
+  username: postgres
+  password: postgres
+  driver-class-name: org.postgresql.Driver
+
+info.app: # ACTUATOR - INFO
+  name: @project.name@
+  environment: local
+  version: @project.version@
+

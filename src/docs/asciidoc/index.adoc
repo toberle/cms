@@ -1,8 +1,5 @@
 = CMS
-Tomas Oberle
-2022-06-24
-:revnumber: {project-version}
-:example-caption!:
+:toc:
 ifndef::imagesdir[:imagesdir: images]
 ifndef::sourcedir[:sourcedir: ../../main/java]
 

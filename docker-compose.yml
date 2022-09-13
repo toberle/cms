@@ -2,13 +2,29 @@ version: "3.9"
 services:
   postgres:
     image: postgres:13-alpine
+    container_name: postgres
     restart: always
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: local_pwd
+      POSTGRES_DB: cms
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
   adminer:
     image: adminer
+    container_name: adminer
     restart: always
     ports:
       - "8090:8080"
+  prometheus:
+    image: bitnami/prometheus:2.38.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    network_mode: host # localhost:9090
+  grafana:
+    container_name: grafana
+    # admin/admin
+    # import dashboard: https://grafana.com/grafana/dashboards/11378-justai-system-monitor/
+    image: grafana/grafana:9.1.1
+    network_mode: host # localhost:3000
