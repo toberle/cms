@@ -4,14 +4,14 @@ import com.example.cms.api.rest.ListDto;
 import com.example.cms.api.rest.staticpage.StaticPageCreateUpdateDto;
 import com.example.cms.api.rest.staticpage.StaticPageDto;
 import com.example.cms.service.StaticPageService;
+import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RequiredArgsConstructor
+@Timed
 @RestController
 @RequestMapping("/static-pages")
 public class StaticPageRestController {
@@ -38,8 +38,7 @@ public class StaticPageRestController {
         return ResponseEntity.ok(staticPageService.create(dto));
     }
 
-    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaticPageDto> update(@RequestBody StaticPageCreateUpdateDto dto, @PathVariable Long id) {
         return ResponseEntity.ok(staticPageService.update(id, dto));
     }
