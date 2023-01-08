@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class RestExceptionHandler {
 
     @ExceptionHandler({EntityNotFoundException.class})
-    public ResponseEntity<ErrorDto> handlerEntityNotFoundException(EntityNotFoundException e) {
+    public ResponseEntity<ErrorDto> handleEntityNotFoundException(EntityNotFoundException e) {
         log.info("NOT FOUND: " + e.getMessage());
         return ResponseEntity.notFound().build();
     }
