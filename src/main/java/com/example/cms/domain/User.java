@@ -3,13 +3,16 @@ package com.example.cms.domain;
 import com.example.cms.domain.converter.BooleanConverter;
 import lombok.Data;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.Instant;
 
 @Data
 @Entity
 @Table(name = "users")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
@@ -31,8 +34,7 @@ public class User {
     private boolean disabled;
 
     @Column(name = "last_invalid_password_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastInvalidPasswordTimestamp;
+    private Instant lastInvalidPasswordTimestamp;
 
     @Column(name = "invalid_passwords")
     private int invalidPasswords;
@@ -43,10 +45,9 @@ public class User {
 
     @CreatedDate
     @Column(name = "created_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdTimestamp;
+    private Instant createdTimestamp;
 
+    @LastModifiedDate
     @Column(name = "updated_ts")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedTimestamp;
+    private Instant updatedTimestamp;
 }

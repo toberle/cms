@@ -8,6 +8,7 @@ import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -28,16 +29,19 @@ public class ArticleRestController {
         return ResponseEntity.ok(articleService.getById(id));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticleDto> create(@RequestBody ArticleCreateUpdateDto create) {
         return ResponseEntity.ok(articleService.create(create));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticleDto> update(@PathVariable("id") Long id, @RequestBody ArticleCreateUpdateDto update) {
         return ResponseEntity.ok(articleService.update(id, update));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ArticleDto> delete(@PathVariable("id") Long id) {
         return ResponseEntity.ok(articleService.delete(id));

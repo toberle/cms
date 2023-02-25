@@ -7,7 +7,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class UserUpdateDto {
-
-    private String email;
+public class UserChangePasswordDto {
+    private String oldPassword;
+    private String newPassword;
 }

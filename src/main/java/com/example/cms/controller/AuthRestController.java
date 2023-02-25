@@ -1,6 +1,6 @@
 package com.example.cms.controller;
 
-import com.example.cms.api.rest.auth.LoginDto;
+import com.example.cms.api.rest.auth.AuthDto;
 import com.example.cms.facade.AuthFacade;
 import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +20,8 @@ public class AuthRestController {
     private final AuthFacade authFacade;
 
     @PostMapping(path = "/login", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> login(@RequestBody LoginDto loginDto) {
-        String jwt = authFacade.login(loginDto);
+    public ResponseEntity<String> login(@RequestBody AuthDto authDto) {
+        String jwt = authFacade.login(authDto);
         return ResponseEntity.ok(jwt);
     }
 }

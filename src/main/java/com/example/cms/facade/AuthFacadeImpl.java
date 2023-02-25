@@ -1,6 +1,6 @@
 package com.example.cms.facade;
 
-import com.example.cms.api.rest.auth.LoginDto;
+import com.example.cms.api.rest.auth.AuthDto;
 import com.example.cms.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,9 +16,9 @@ public class AuthFacadeImpl implements AuthFacade {
     private final AuthService authService;
 
     @Override
-    public String login(LoginDto loginDto) {
+    public String login(AuthDto authDto) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword())
+                new UsernamePasswordAuthenticationToken(authDto.getUsername(), authDto.getPassword())
         );
         return authService.login(authentication);
     }

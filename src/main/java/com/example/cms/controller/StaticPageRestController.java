@@ -8,6 +8,7 @@ import io.micrometer.core.annotation.Timed;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -33,16 +34,19 @@ public class StaticPageRestController {
         return ResponseEntity.ok(staticPageService.getByAlias(alias));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaticPageDto> create(@RequestBody StaticPageCreateUpdateDto dto) {
         return ResponseEntity.ok(staticPageService.create(dto));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaticPageDto> update(@RequestBody StaticPageCreateUpdateDto dto, @PathVariable Long id) {
         return ResponseEntity.ok(staticPageService.update(id, dto));
     }
 
+    @PreAuthorize("hasAuthority('SCOPE_ROLE_USER')")
     @DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<StaticPageDto> delete(@PathVariable Long id) {
         return ResponseEntity.ok(staticPageService.delete(id));
