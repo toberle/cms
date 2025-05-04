@@ -3,8 +3,8 @@ package com.example.cms.domain;
 import com.example.cms.domain.converter.BooleanConverter;
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Data
 @Entity

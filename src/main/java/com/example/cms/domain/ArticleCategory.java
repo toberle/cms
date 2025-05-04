@@ -2,13 +2,13 @@ package com.example.cms.domain;
 
 import lombok.Data;
 
-import javax.persistence.*;
-import javax.validation.constraints.Size;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Data
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "article_categories")
+public class ArticleCategory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

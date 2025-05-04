@@ -7,7 +7,7 @@ import com.example.cms.domain.Article;
 import com.example.cms.exception.EntityNotFoundException;
 import com.example.cms.mapper.ArticleMapper;
 import com.example.cms.repository.ArticleRepository;
-import com.example.cms.repository.CategoryRepository;
+import com.example.cms.repository.ArticleCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -20,7 +20,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     public static final int PAGE_SIZE = 20;
     private final ArticleRepository articleRepository;
-    private final CategoryRepository categoryRepository;
+    private final ArticleCategoryRepository articleCategoryRepository;
     private final ArticleMapper articleMapper;
 
     @Transactional(readOnly = true)
@@ -65,7 +65,7 @@ public class ArticleServiceImpl implements ArticleService {
     public ArticleDto create(ArticleCreateUpdateDto dto) {
         Article article = articleMapper.map(dto);
         if (dto.getCategoryId() != null) {
-            article.setCategory(categoryRepository.getById(dto.getCategoryId()));
+            article.setCategory(articleCategoryRepository.getById(dto.getCategoryId()));
         }
         Article created = articleRepository.save(article);
         return articleMapper.map(created);
@@ -78,7 +78,7 @@ public class ArticleServiceImpl implements ArticleService {
                 .orElseThrow(() -> new EntityNotFoundException("Article not found - cannot update - id: " + id));
         articleMapper.update(dto, article);
         if (dto.getCategoryId() != null) {
-            article.setCategory(categoryRepository.getById(dto.getCategoryId()));
+            article.setCategory(articleCategoryRepository.getById(dto.getCategoryId()));
         }
         Article updated = articleRepository.save(article);
         return articleMapper.map(updated);

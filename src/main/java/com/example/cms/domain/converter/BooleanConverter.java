@@ -1,6 +1,6 @@
 package com.example.cms.domain.converter;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 public class BooleanConverter implements AttributeConverter<Boolean, String> {
 
